@@ -1,0 +1,128 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  font-family: Roboto, Arial, Helvetica;
+}
+body:after{
+  content : "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url(assets/img/fundo-praia.webp);
+  background-size: cover;
+  background-repeat: none;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  opacity : 0.5;
+  z-index: -1;
+}
+#menu {
+  display: flex;
+  justify-content: space-around;
+  background-color: black;
+  height: 47px;
+  min-width: 700px;
+  align-items: center;
+  font-size: 16px;
+}
+.a-menu {
+  text-decoration: none;
+  padding: 14px;
+  color: white;
+  font-weight: bold;
+  transition: background .3s;
+}
+.a-menu:hover {
+  background-color: #787878;
+}
+
+#exercise1{
+  margin-top: 3vh;
+  display: flex;
+  flex-direction: column;  
+  justify-content: center;
+  align-items: center;
+}
+.exercise{
+  padding: 2vh 2vw;
+  width: 40vw;
+  display: flex;
+  flex-direction: column;  
+  justify-content: center;
+  gap: 3vh;
+  align-items: center;  
+  border-radius: 10px;
+  border: 2px solid #ffa500;
+  background-color: #ffffff70;
+}
+h1{
+  text-align: center;
+}
+#frm-inputs{
+  display: flex;
+  flex-direction: column;  
+  justify-content: center;
+  align-items: center;  
+  gap: 4vh;
+} 
+.ctn-input{
+  width: 20vw;
+  display: flex;
+  gap: 1vw;
+}
+.ctn-input input{
+  width: 10vw;
+  height: 2.3vh;
+}
+.ctn-input label{
+  width: 14vw;
+  text-align: center;
+}
+#ctn-select{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26vw;
+  gap: 1vw;
+}
+#lbl-select{
+  width: 8vw;
+  text-align: right;
+}
+
+#sel-operator{
+  width: 18vw;
+  align-self: left;
+  font-size: 14px;
+  height: 3vh;
+}
+
+#btn-calc{
+  width: 15vw;
+  height: 5vh;
+  color: #fff;
+  background-color: #787878;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#btn-calc:hover{
+  background-color: #78787870;
+  color: #000;
+}
+#h3-result{
+  font-weight: 700;
+  font-size: 18px;
+  word-spacing: 0.1;
+  padding-bottom: 2vh;
+  width: 20vw;
+  height: 6vh;
+  text-align: center;
+}
