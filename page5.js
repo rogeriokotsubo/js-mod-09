@@ -8,6 +8,7 @@ let resSum = 0;
 let resDiv = 0;
 let times = 0;
 let resMult = 0;
+let factor = 0;
 
 function CheckInt(num1, num2){;
   if (isNaN(num1)){
@@ -53,12 +54,19 @@ function Calcular() {
   times = 0;
   resDiv = 0;
   resMult = 0;
+  factor = 0;
+
   if (num1==0){
     resDiv = 0;
   } else { 
-    dividir(num1,num2);
-    subtrair(num1,resSum);
-  }
+    if (num2==1){
+      resDiv = num1;
+      diff = 0;
+    } else {
+      dividir(num1,num2);
+      subtrair(num1,resSum);
+    }
+  }  
   
   resultFinal.textContent=`Resultado: ${resDiv} e Resto: ${diff}`;
 } 
@@ -81,11 +89,25 @@ function multiplicar(num1,num2){
 }
 
 function subtrair(num1,num2){
-    if (num2<num1){
-      sum  = somar(num2,1);       // incrementador num2
-      diff = somar(diff,1);       // resultado da subtração
-      subtrair(num1,sum);
+  let factorTmp = 0;
+  let sumTmp = 0;
+
+  if (num2<num1){
+    if (factor===0){
+      factorTmp = 1;        // incrementador tmp dobra a cada interação
+    } else {
+      factorTmp = somar(factor,factor);
     }
+    sumTmp  = somar(num2,factorTmp);       
+    if (sumTmp>num1){                     // testando incrementador tmp
+      factor = 1;                         // se soma > num1, volta para 1
+    } else {                              // e voltando a dobrar
+      factor = factorTmp;                 
+    }
+    sum  = somar(num2,factor);       // incrementador num2
+    diff = somar(diff,factor);       // resultado da subtração
+    subtrair(num1,sum);
+  }
 }
 
 function somar(operando1,operando2){
