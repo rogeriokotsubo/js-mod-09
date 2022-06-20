@@ -9,6 +9,8 @@ let resDiv = 0;
 let times = 0;
 let resMult = 0;
 let factor = 0;
+let timesTmp = 0;
+let timesFactor = 0;
 
 function CheckInt(num1, num2){;
   if (isNaN(num1)){
@@ -55,6 +57,8 @@ function Calcular() {
   resDiv = 0;
   resMult = 0;
   factor = 0;
+  timesTmp = 0;
+  timesFactor = 0;
 
   if (num1==0){
     resDiv = 0;
@@ -64,6 +68,9 @@ function Calcular() {
       diff = 0;
     } else {
       dividir(num1,num2);
+      diff = 0;
+      factor = 0;
+      sum = 0;
       subtrair(num1,resSum);
     }
   }  
@@ -72,21 +79,75 @@ function Calcular() {
 } 
 
 function dividir(num1,num2){
-  let vcheck=somar(resSum,num2);  // para verificar se resMult+num2 > num1 -> stop a recursão
-  if (vcheck<=num1){               // executar até resMult <= num1
-    resSum = somar(resSum,num2); // acumulador resSum  num2 * resDiv
-    resDiv = somar(resDiv,1);      // resultado da divisão
+  //let vcheck=somar(resSum,num2);  // para verificar se resMult+num2 > num1 -> stop a recursão
+  let sumTemp = 0;
+  let vcheck = somar(resSum,num2);
+
+  if (vcheck<=num1){               // executar até resSum+num2 <= num1
+    let counterTmp = 0;
+    if (timesTmp === 0){
+      counterTmp = 1;
+    } else {
+      counterTmp = somar(timesTmp,timesTmp);   // dobrando a cada chamada
+    }
+    resMult = 0;
+    times = 0;
+    timesFactor = 0;
+    if (num2<counterTmp){
+      multiplicar(counterTmp,num2);
+    }  
+    else {
+      multiplicar(num2,counterTmp);  
+    }
+    sumTemp = resMult;
+    vcheck = somar(sumTemp, resSum);    // verificando se o novo multiplicador estoura
+    if  (vcheck>num1){               // se estourar, volta para 1
+      timesTmp = 1;
+      sumTemp = num2;
+    } else {
+      timesTmp = counterTmp;
+    }
+
+    resSum = somar(resSum,sumTemp); // acumulador resSum  num2 * resDiv
+    resDiv = somar(resDiv,timesTmp);      // resultado da divisão
     dividir(num1,num2);
   }
 }
 
+
 function multiplicar(num1,num2){
+  let factorTmp = 0;
+  let sumTmp = 0;
+  factor = 0;
+  sum = 0;
+
+  if (timesFactor<num2){
+    diff = 0;
+    factor = 0;
+    sum = 0;
+    subtrair(num2,timesFactor);
+    factorTmp = diff;
+    if (factorTmp>8192){
+      factorTmp = 8192;  
+    }
+    times = 0;
+    multiplicarAte8192(num1,factorTmp);
+    timesFactor = somar(timesFactor,times);
+
+    if (timesFactor<num2){
+      multiplicar(num1,num2);
+    }
+  }
+}
+
+function multiplicarAte8192(num1,num2){
   if (times<num2){
     resMult = somar(resMult,num1);  // resultado da multiplicação
     times = somar(times,1);       // contador número de somas
-    multiplicar(num1,num2);
+    multiplicarAte8192(num1,num2);
   }
 }
+
 
 function subtrair(num1,num2){
   let factorTmp = 0;
